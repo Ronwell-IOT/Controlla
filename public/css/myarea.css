@@ -1,0 +1,29 @@
+.area-buttons{
+    background-color: rgb(73, 73, 73);
+    color: white;
+    border: none;
+    background: none;
+    width: 100%;
+    min-width: 100px;
+    overflow: auto;
+}
+.area-buttons:hover{
+     background-color: rgb(156, 152, 152);
+}
+.area-selection{
+    background-color: rgb(73, 73, 73);
+    height: 100vh;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: auto;
+}
+.areaName, .areaDesc{
+    color: white;
+}
+@media screen and (max-width: 766px) {
+    .area-selection{
+        display: flex;
+        text-align: center;
+        height: fit-content;
+    }
+  }

@@ -1,0 +1,128 @@
+/* Made with love by Mutiullah Samim*/
+
+.container{
+    align-content: center;
+}
+
+.login-wrapper{
+    height: 100vh;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+.login-container{
+
+    height: fit-content;
+}
+.card-body{
+    padding-bottom: 5% !important;
+}
+.logo{
+    margin-top: -20%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: block;
+}
+.card-login{
+    padding-left: 3em;
+    padding-right: 3em;
+    border-radius: 10px;
+    height: fit-content;
+    /* padding-top: 1%; */
+    width: 50%;
+    background-color: rgba(36, 34, 34, 0.7) !important;
+}
+.side-display{
+    padding-left: 3em;
+    padding-right: 3em;
+    border-radius: 10px;
+    height: fit-content;
+    padding-top: 150px;
+    width: 100%;
+
+
+}
+.side-display-wrapper{
+    background-color: rgb(49, 48, 48);
+}
+/* .logo{
+    position: absolute;
+    left: 35%;
+    top:-15%;
+} */
+
+.card-header h3{
+    color: white;
+    font-family: 'Josefin Sans', sans-serif !important;
+}
+
+.input-group-prepend span{
+    width: 50px;
+    background-color: #0f8d83;
+    color: black;
+    border:0 !important;
+}
+
+input:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;
+
+}
+
+.login_btn{
+    color: black;
+    background-color: #0f8d83 !important;
+    width: 100px;
+    border: none;
+    font-family: 'Josefin Sans', sans-serif !important;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-top: 2%;
+    border-radius: 15px;
+    color: white;
+    font-weight: bolder;
+    height: 3em;
+
+}
+
+.login_btn:hover{
+    color: black;
+    background-color: white;
+}
+.back-vid{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+@media screen and (max-width: 1165px) {
+
+    .card-login{
+        width: 80% !important;
+    }
+}
+
+
+.login-nav{
+    background-color: #212122 !important;
+}
+
+.login-footer{
+    background-color: #212122 !important;
+    min-height: 50px;
+    height: 100%;
+}
+.footer-link{
+    color: white !important;
+    text-decoration: none !important;
+
+}
+.footer-copyright{
+    color: gray;
+}

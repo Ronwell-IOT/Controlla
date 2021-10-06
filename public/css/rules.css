@@ -1,0 +1,44 @@
+.rule-container{
+    /* border-radius: 30px !important; */
+    width: 100%;
+    height: auto;
+    padding: 5px 5px 5px 5px;
+    display: block;
+
+}
+.rule-label{
+    font-size: medium;
+    color: #0f8d83 !important;
+    width: 100%;
+    width: 300px !important;
+}
+
+.rule{
+    padding-left: 10%;
+}
+
+.rule-value{
+    padding-right: 10%;
+}
+
+.rule-desc{
+    font-size: large;
+    font-weight: bolder;
+}
+.use-sensor, .use-sensor2{
+    display: none;
+    background-color: rgb(216, 214, 210);
+    padding: 2%;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.use-timer, .use-timer2{
+    display: none;
+    background-color: rgb(194, 227, 255);
+    padding: 1%;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+}

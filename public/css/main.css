@@ -1,0 +1,135 @@
+body{
+
+    width: 100%;
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+}
+.no-gutter{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+}
+.acitivity-area{
+    height: 100%;
+    min-height: 50vh;
+    max-height: 55vh;
+    overflow: auto;
+}
+.notif-area{
+    max-height: 400px;
+    overflow: auto;
+}
+
+.control-item{
+    border: 1px solid rgb(24, 34, 41);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.control-item-button{
+    background-color: white import !important;
+    border-radius: 50px;
+}
+.shad{
+    /* background-color: rgb(209, 209, 209); */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    border: 0.5 solid grey;
+}
+thead{
+    background-color: #0f8d83 !important;
+}
+.btn-outline-success{
+    border-color: #0f8d83 !important;
+    color: #0f8d83 !important;
+}.btn-primary{
+    background-color: #0f8d83 !important;
+    color: white!important;
+    border-radius: 50px;
+    border-color: #0f8d83 !important;
+}
+.btn-outline-success:hover{
+    border-color: #0f8d83 !important;
+    background-color:#0f8d83 ;
+    color: white !important;
+}
+.list-group-item-success{
+    background-color: white !important;
+    color: black !important;
+    font-size: small;
+}
+
+.josefin-font{
+    font-family: 'Josefin Sans', sans-serif;
+    /* font-family: 'Squada One', cursive; */
+}
+.card-header div{
+    font-size: large;
+}
+.card-body p{
+    font-size: medium;
+}
+button:focus{outline: 0 !important;}
+
+.custom-button{
+    background-color: #0f8d83;
+    border-radius: 50px;
+    border: 1px solid #0f8d83;
+    color: white;
+    padding: 5px 10px 5px 10px;
+}
+.custom-button:hover{
+    background-color: white;
+    border-radius: 50px;
+    font-weight: bolder;
+    border: 3px solid #0f8d83;
+    color: #0f8d83;
+}
+
+.no-space{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+
+}
+.Device-Area{
+    overflow: auto;
+    max-height: 900px;
+    padding-left: 1%;
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+.control-area{
+    overflow: auto;
+    max-height: 900px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+@media screen and (min-height: 1759px) {
+
+    .control-area{
+        max-height: 1500px !important;
+    }
+}
+.exec-com{
+    background: white;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    border-radius: 25px;
+}

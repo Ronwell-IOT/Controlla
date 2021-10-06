@@ -1,0 +1,24 @@
+.contact-form{
+    padding: 5%;
+    background-color: white;
+
+    margin-top: 4%;
+    margin-bottom: 4%;
+    min-height: 65vh;
+    width: 100%;
+    border-radius: 20px;
+}
+.contact-map{
+    padding-left: 3%;
+}
+.privacy-statement{
+    text-decoration: none !important;
+    color: black;
+}
+.privacy-statement:hover{
+    color: #0f8d83;
+
+}
+.contact-page{
+    height: 100% !important ;
+}

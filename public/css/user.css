@@ -1,0 +1,37 @@
+.settings-wrapper{
+    background-color: white;
+    border-radius: 20px;
+    width: 100%;
+    min-height: 600px;
+}
+.sidebar-setting{
+    background-color: rgb(32, 32, 32);
+    height: 100%;
+    min-height: 600px;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+@media screen and (max-width: 767px) {
+    .sidebar-setting{
+        display: flex;
+        min-height: 0;
+    }
+  }
+.sidebar-item{
+    background-color: transparent;
+    border: transparent;
+    color: #0f8d83;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.sidebar-item:hover{
+    font-weight: bolder;
+    background-color: rgb(83, 83, 83);
+
+}
+.sidebar-item:active{
+    font-weight: bolder;
+    background-color: rgb(83, 83, 83);
+
+}

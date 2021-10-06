@@ -1,0 +1,122 @@
+body {font-family: "Lato", sans-serif;}
+
+.sidebar {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #212122;
+  z-index: 100;
+  transition: all 0.5s ease;
+
+  width: 260px;
+  display: block;
+}
+.home-section{
+    position: relative;
+    height: 100vh;
+    transition: all 0.5s ease;
+
+    left: 260px;
+    width: calc(100% - 260px);
+    /* left: 0px;
+    width: 100%; */
+
+  }
+@media screen and (max-width: 1086px) {
+    .sidebar {
+        display: none;
+        width: 0 !important;
+
+    }
+    .home-section{
+        /* left: 260px;
+        width: calc(100% - 260px); */
+        left: 0px;
+        width: 100%;
+
+      }
+}
+
+
+.sidebar a,p {
+  padding: 0 15% 0 15%;
+  text-decoration: none;
+  font-size: 1.5em;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  margin-bottom: 10%;
+}
+.dropdown-btn{
+    width: 100%;
+    padding: 0 15% 0 15%;
+    text-align: left;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #818181;
+    /* display: block; */
+    border: none;
+    background: none;
+    margin-bottom: 10%;
+}
+.sidebar h1 {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-size: 30px;
+    color: #818181;
+    display: block;
+  }
+
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+/* .logout{
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 3%;
+} */
+
+
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+.colors{
+    background-color: #ffad7d;
+}
+.dropdown-container{
+    display: none;
+    font-size: 10px
+}
+.dropdown-sublink{
+    font-size: 17px;
+    padding-left: 25%;
+}
+.icon-style{
+    font-size:"30px" !important;
+    margin-bottom:"10px";
+}
+.link-name{
+    padding-left: 10%;
+}
+
+
+.logout{
+    position: fixed;
+    bottom: 0;
+    width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    transition: all 0.5s ease;
+    display: block;
+    background-color: black;
+    padding-top: 1%;
+}
