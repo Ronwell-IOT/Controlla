@@ -177,7 +177,7 @@ class Control extends Component {
 
 
         }
-        componentDidMount(){
+        async componentDidMount(){
             this._isMounted = true;
             if (localStorage.getItem("username") === null) {
                 window.location.replace('/')
@@ -187,7 +187,7 @@ class Control extends Component {
 
 
             // get value from database for device obj in state
-            axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetControlDevice",{
+            await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetControlDevice",{
             headers: {
                 authorization: token
             },
@@ -204,7 +204,7 @@ class Control extends Component {
                 console.log(error);
             })
 
-            axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetSensors",{
+            await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetSensors",{
             headers: {
                 authorization: token
             },
@@ -224,9 +224,9 @@ class Control extends Component {
             const source = CancelToken.source();
 
 
-            this.myInterval = setInterval(()=>{ // this is a sample random data for the sensors
+            this.myInterval = setInterval(async()=>{ // this is a sample random data for the sensors
                 // for(var i = 0; i < this.state.sensor.length; i++ ){
-                    axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetSensors",{
+                    await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetSensors",{
                         cancelToken: source.token,
                         headers: {
                             authorization: token

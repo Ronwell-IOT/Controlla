@@ -39,7 +39,7 @@ class Dashboard extends Component {
         }
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         let data_route = process.env.MIX_DATA_ROUTES;
 
         // console.log(data_route)
@@ -53,7 +53,7 @@ class Dashboard extends Component {
         var token = "Bearer "+window.atob(localStorage.getItem('token'))
 
         // number of device
-        axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetControlDeviceNum",{
+        await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetControlDeviceNum",{
             headers: {
                 authorization: token
             },
@@ -69,7 +69,7 @@ class Dashboard extends Component {
             })
 
         // number of sensors
-        axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetSensorsNum",{
+        await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetSensorsNum",{
             headers: {
                 authorization: token
             },
@@ -84,7 +84,7 @@ class Dashboard extends Component {
                 window.location.replace('/')
             })
         // number of rules
-        axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetRulesNum",{
+        await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetRulesNum",{
             headers: {
                 authorization: token
             },
@@ -99,7 +99,7 @@ class Dashboard extends Component {
                 window.location.replace('/')
             })
         // number of areas
-        axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetAreasNum",{
+        await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetAreasNum",{
             headers: {
                 authorization: token
             },
@@ -114,7 +114,7 @@ class Dashboard extends Component {
                 window.location.replace('/')
             })
         //Get the number of sensor allocated to the areas
-        axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetSensorPerArea",{
+        await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetSensorPerArea",{
             headers: {
                 authorization: token
             },
@@ -129,7 +129,7 @@ class Dashboard extends Component {
                 window.location.replace('/')
             })
         // Get the number of sensor allocated to each areas
-        axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetDevicePerArea",{
+        await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetDevicePerArea",{
             headers: {
                 authorization: token
             },
@@ -144,7 +144,7 @@ class Dashboard extends Component {
                 window.location.replace('/')
             })
         // Get all device that is not allocated to areas
-        axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetUnallocatedSen",{
+        await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetUnallocatedSen",{
             headers: {
                 authorization: token
             },
@@ -159,7 +159,7 @@ class Dashboard extends Component {
                 window.location.replace('/')
             })
         // Get all device thet is not allocated to areas
-        axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetUnallocatedDev",{
+        await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetUnallocatedDev",{
             headers: {
                 authorization: token
             },
@@ -177,9 +177,9 @@ class Dashboard extends Component {
         const CancelToken = axios.CancelToken;
         const source = CancelToken.source();
 
-        this.myInterval = setInterval(()=>{
+        this.myInterval = setInterval(async()=>{
             // continues process of getting the logs from the server
-            axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetLogs",{
+            await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/GetLogs",{
                 cancelToken: source.token,
                 headers: {
                     authorization: token
@@ -199,7 +199,7 @@ class Dashboard extends Component {
                     }
                 })
             // Get the latest voice commands
-            axios.get("http://"+process.env.MIX_DATA_ROUTES+"/getVaCommandValue2",{
+            await axios.get("http://"+process.env.MIX_DATA_ROUTES+"/getVaCommandValue2",{
                 headers: {
                     authorization: token
                 },
