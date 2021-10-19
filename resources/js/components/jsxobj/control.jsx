@@ -29,6 +29,8 @@ class Control extends Component {
                 deviceName: "",
                 description:"",
                 type:0,
+                minval:0,
+                maxval:100,
             }
 
           } // end of state
@@ -41,6 +43,8 @@ class Control extends Component {
           this.handleDevicenameChange = this.handleDevicenameChange.bind(this) // this when the device text box in the edit modal is changed.
           this.handleDeviceIdChange = this.handleDeviceIdChange.bind(this) // this is when the device id text box in the edit modal is changed.
           this.handleDevicedesChange =this.handleDevicedesChange.bind(this) // this is when the device description in the edit modal is changed
+          this.handleminvalChange = this.handleminvalChange.bind(this)
+          this.handlemaxvalChange = this.handlemaxvalChange.bind(this)
             //  this.updateSensorValue = this.updateSensorValue.bind(this);
         }
         handleButtonToggle(id){  /////////// function for switching the control on/ off
@@ -97,6 +101,8 @@ class Control extends Component {
             var devName = "";
             var devId = "";
             var description = "";
+            var minval;
+            var maxval;
             var type
             document.querySelector('.bg-modal').style.display = 'flex'; // show the edit modal => located below
             for( var i = 0; i < this.state.device.length; i++ ){
@@ -112,6 +118,8 @@ class Control extends Component {
                     devName = this.state.sensor[i].deviceName;
                     devId = this.state.sensor[i].id;
                     description = this.state.sensor[i].description;
+                    minval = this.state.sensor[i].minval;
+                    maxval = this.state.sensor[i].maxval;
                     type = 1;
                 }
             }
@@ -122,6 +130,8 @@ class Control extends Component {
                 Edit.id = devId;
                 Edit.description = description;
                 Edit.type = type;
+                Edit.minval = minval;
+                Edit.maxval = maxval;
                 return { Edit };                                 // return new object object
               })  // saving the edit object that can be used for update query to db
 
@@ -146,10 +156,12 @@ class Control extends Component {
                 axios.post('/api/UpdateSensor', {
                     id: this.state.Edit.id,
                     deviceName: this.state.Edit.deviceName,
-                    description: this.state.Edit.description
+                    description: this.state.Edit.description,
+                    minval: parseInt(this.state.Edit.minval),
+                    maxval: parseInt(this.state.Edit.maxval),
                 })
                 alert("Sensor Updated ")
-                location.reload();
+                 location.reload();
             }
 
 
@@ -284,6 +296,28 @@ class Control extends Component {
                 }
             )
         }
+        handleminvalChange(event){
+            var Edit = this.state.Edit;
+            var minval = event.target.value;
+            Edit.minval = minval;
+            this.setState(
+                {
+                    Edit: Edit
+                }
+            )
+            console.log(this.state.Edit.minval)
+        }
+        handlemaxvalChange(event){
+            var Edit = this.state.Edit;
+            var maxval = event.target.value;
+            Edit.maxval = maxval;
+            this.setState(
+                {
+                    Edit: Edit
+                }
+            )
+            console.log(this.state.Edit.maxval)
+        }
         handleDevicedesChange(event){// runs when data in edit modal => device description  textbox has changed
             var Edit = this.state.Edit;
             var modifiedDevdes = event.target.value;
@@ -293,6 +327,29 @@ class Control extends Component {
                     Edit: Edit
                 }
             )
+        }
+        sensorValueAdditionalSettings(){
+
+                if(this.state.activeTab == 1){
+                    return(
+                    <div>
+                        <h5 className="josefin-font">For sensor value</h5>
+                        <div className="form-group row">
+                            <label htmlFor="deviceId" className="col-sm-2 col-form-label">Minimum</label>
+                            <div className="col-sm-10">
+                                <input type="text" onChange={this.handleminvalChange} value={this.state.Edit.minval} className="form-control" id="minval" required/>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label  className="col-sm-2 col-form-label" htmlFor="deviceName">Maximum</label>
+                            <div className="col-sm-10">
+                                <input type="text" onChange={this.handlemaxvalChange} value={this.state.Edit.maxval} className="form-control" id="maxval" required />
+                            </div>
+                        </div>
+                    </div>
+                    );
+                }
+
         }
         toggleTab(){ // switches tab
 
@@ -437,13 +494,13 @@ class Control extends Component {
                             <div className="col-md-12">
                             <form>
                                 <div className="form-group row">
-                                    <label htmlFor="deviceId" className="col-sm-2 col-form-label">Device/Sensor Id</label>
+                                    <label htmlFor="deviceId" className="col-sm-2 col-form-label">Id</label>
                                     <div className="col-sm-10">
                                         <input type="text" onChange={this.handleDeviceIdChange} defaultValue={this.state.Edit.id} className="form-control" id="deviceId" required/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    <label  className="col-sm-2 col-form-label" htmlFor="deviceName">Device/Sensor Name</label>
+                                    <label  className="col-sm-2 col-form-label" htmlFor="deviceName">Name</label>
                                     <div className="col-sm-10">
                                         <input type="text" onChange={this.handleDevicenameChange} defaultValue={this.state.Edit.deviceName} className="form-control" id="deviceName" required />
                                     </div>
@@ -456,8 +513,7 @@ class Control extends Component {
 
                                     </div>
                                 </div>
-
-
+                                {this.sensorValueAdditionalSettings()}
                             </form>
                             <div className="form-group row">
                                     <div className="col-sm-10">

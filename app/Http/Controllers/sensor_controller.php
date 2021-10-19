@@ -157,7 +157,9 @@ class sensor_controller extends Controller
             $id = $request->input('id');
             $deviceName = $request->input('deviceName');
             $description = $request->input('description');
-            DB::UPDATE('UPDATE sensors SET deviceName = ?, description =?  where id= ? ', [$deviceName , $description , $id] );
+            $minval = $request->input('minval');
+            $maxval = $request->input('maxval');
+            DB::UPDATE('UPDATE sensors SET deviceName = ?, description =?, minval=?, maxval=?  where id= ? ', [$deviceName , $description , $minval, $maxval, $id] );
 
             return response()->json(['message'=>'Data received'], 200);
         }else {
