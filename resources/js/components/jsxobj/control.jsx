@@ -515,7 +515,7 @@ class Control extends Component {
                                 </div>
                                 {this.sensorValueAdditionalSettings()}
                             </form>
-                            <div className="form-group row">
+                                <div className="form-group row">
                                     <div className="col-sm-10">
                                         <button onClick={this.handleUpdateDB} className="btn btn-primary">Save</button>
                                     </div>

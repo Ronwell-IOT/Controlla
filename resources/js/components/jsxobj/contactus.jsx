@@ -1,6 +1,51 @@
 import React, { Component } from 'react'
 
 class ContactUs extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            reason:"",
+            name:"",
+            email:"",
+            mobile:"",
+            message:""
+        }
+        this.handleReasonChanged = this.handleReasonChanged.bind(this)
+        this.handleFullnameChanged = this.handleFullnameChanged.bind(this)
+        this.handleEmailChanged = this.handleEmailChanged.bind(this)
+        this.handleMobileChanged = this.handleMobileChanged.bind(this)
+        this.handleMessageChanged = this.handleMessageChanged.bind(this)
+        this.send = this.send.bind(this)
+    }
+    handleReasonChanged(e){this.setState({reason: e.target.value});}
+    handleFullnameChanged(e){this.setState({name: e.target.value});}
+    handleEmailChanged(e){this.setState({email: e.target.value});}
+    handleMobileChanged(e){this.setState({mobile: e.target.value});}
+    handleMessageChanged(e){this.setState({message: e.target.value});}
+    send(){
+        var Email = { send: function (a) { return new Promise(function (n, e) { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) { n(e) }) }) }, ajaxPost: function (e, n, t) { var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () { var e = a.responseText; null != t && t(e) }, a.send(n) }, ajax: function (e, n) { var t = Email.createCORSRequest("GET", e); t.onload = function () { var e = t.responseText; null != n && n(e) }, t.send() }, createCORSRequest: function (e, n) { var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t } };
+        // Email.send({
+        //     Host : "smtp.elasticemail.com",
+        //     Username : "rpbutial@multisyscorp.com",
+        //     Password : "0D3C4B767DBD278B44E09C458AF29F9388E7",
+        //     To : 'rpbutial@multisyscorp.com',
+        //     From : this.state.email,
+        //     Subject : this.state.reason,
+        //     Body : "name : "+this.state.name+"mobile : "+this.state.mobile+"\n mesage : "+this.state.message,
+        // }).then(
+        //   message => alert(message)
+        // );
+
+        Email.send({
+            SecureToken : "18709091-9678-4dad-a5c8-d970034cece2",
+            To : 'rpbutial@multisyscorp.com',
+            From : this.state.email,
+            Subject : this.state.reason,
+            Body : "name : "+this.state.name+"\r mobile : "+this.state.mobile+"\r mesage : "+this.state.message,
+        }).then(
+          message => alert(message)
+        );
+    }
     render() {
         return (
             <React.Fragment>
@@ -13,45 +58,52 @@ class ContactUs extends Component {
                                     <div className="form-row">
                                         <div className="form-group col-md-12">
                                             <label htmlFor="reason">Reason for contacting us</label>
-                                                <select className="form-control" id="purpose">
-                                                <option>Inquiry</option>
-                                                <option>Partnership</option>
-                                                <option>General Inquiry</option>
-                                                <option>Others</option>
-                                            </select>
+                                                <select className="form-control" id="purpose" onChange={this.handleReasonChanged} value={this.state.reason}>
+                                                    <option></option>
+                                                    <option>Inquiry</option>
+                                                    <option>Partnership</option>
+                                                    <option>General Inquiry</option>
+                                                    <option>Others</option>
+                                                </select>
                                         </div>
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-12">
                                             <label htmlFor="Fullname">Full Name</label>
-                                            <input type="Fullname" className="form-control" id="Fullname"/>
+                                            <input type="Fullname" value={this.state.name} onChange={this.handleFullnameChanged} className="form-control" id="Fullname"/>
                                         </div>
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-6">
                                             <label htmlFor="email">Email</label>
-                                            <input type="email" className="form-control" id="email"/>
+                                            <input type="email" value={this.state.email} onChange={this.handleEmailChanged} className="form-control" id="email"/>
                                         </div>
                                         <div className="form-group col-md-6">
                                             <label htmlFor="mobile">Mobile No</label>
-                                            <input type="mobile" className="form-control" id="mobile"/>
+                                            <input type="mobile" value={this.state.mobile} onChange={this.handleMobileChanged} className="form-control" id="mobile"/>
                                         </div>
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-12">
                                             <label htmlFor="messaage">Message</label>
-                                            <textarea className="form-control" id="messaage" rows="3"></textarea>
+                                            <textarea className="form-control" value={this.state.message} onChange={this.handleMessageChanged} id="messaage" rows="3"></textarea>
                                         </div>
                                     </div>
-                                    <div className="form-row">
+                                    {/* <div className="form-row">
                                         <div className="form-check">
                                             <input className="form-check-input" type="checkbox" value="" id="agree"/>
                                             <label className="form-check-label" htmlFor="agree">
                                                I agree with the <a href="" className="privacy-statement">Privacy Statement</a>
                                             </label>
                                         </div>
-                                    </div>
+                                    </div> */}
+
                                 </form>
+                                    <div className="form-group row">
+                                        <div className="col-sm-10">
+                                            <button onClick={this.send} className="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                         <div className="col-md-5 contact-map">
