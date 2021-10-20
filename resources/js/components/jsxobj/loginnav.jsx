@@ -18,9 +18,9 @@ class LoginNav extends Component {
                             <li className="nav-item">
                                 <a className="nav-link josefin-font text-large" href="/contact" style={{fontSize:"18px"}}>Contact Us</a>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <a className="nav-link josefin-font text-large" href="" style={{fontSize:"18px"}}>About</a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </nav>
