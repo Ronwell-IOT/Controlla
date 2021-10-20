@@ -23,18 +23,9 @@ class ContactUs extends Component {
     handleMobileChanged(e){this.setState({mobile: e.target.value});}
     handleMessageChanged(e){this.setState({message: e.target.value});}
     send(){
+
+        // using smtp js
         var Email = { send: function (a) { return new Promise(function (n, e) { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) { n(e) }) }) }, ajaxPost: function (e, n, t) { var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () { var e = a.responseText; null != t && t(e) }, a.send(n) }, ajax: function (e, n) { var t = Email.createCORSRequest("GET", e); t.onload = function () { var e = t.responseText; null != n && n(e) }, t.send() }, createCORSRequest: function (e, n) { var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t } };
-        // Email.send({
-        //     Host : "smtp.elasticemail.com",
-        //     Username : "rpbutial@multisyscorp.com",
-        //     Password : "0D3C4B767DBD278B44E09C458AF29F9388E7",
-        //     To : 'rpbutial@multisyscorp.com',
-        //     From : this.state.email,
-        //     Subject : this.state.reason,
-        //     Body : "name : "+this.state.name+"mobile : "+this.state.mobile+"\n mesage : "+this.state.message,
-        // }).then(
-        //   message => alert(message)
-        // );
 
         Email.send({
             SecureToken : "18709091-9678-4dad-a5c8-d970034cece2",
