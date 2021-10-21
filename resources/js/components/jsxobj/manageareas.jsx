@@ -20,29 +20,35 @@ class ManageAreas extends Component {
         this.loadAreasRow = this.loadAreasRow.bind(this)
         this.handlebuttonEdit = this.handlebuttonEdit.bind(this)
         this.handlebuttonDelete = this.handlebuttonDelete.bind(this)
-        this.handleAreaNameChange = this.handleAreaNameChange.bind(this)
         this.handleCloseModalButton = this.handleCloseModalButton.bind(this)
-        this.handleAreaDescriptionChange = this.handleAreaDescriptionChange.bind(this)
         this.handleUpdateDB = this.handleUpdateDB.bind(this)
         this.handleCloseAddModalButton = this.handleCloseAddModalButton.bind(this)
-        this.addAreaName = this.addAreaName.bind(this)
-        this.addAreaDescription = this.addAreaDescription.bind(this)
         this.handleAddAreaButton = this.handleAddAreaButton.bind(this)
         this.handleInsertDb = this.handleInsertDb.bind(this)
+        this.handleEditChange = this.handleEditChange.bind(this)
+        this.handleAddChange = this.handleAddChange.bind(this)
     }
-    handleAreaNameChange(event){ var Edit = this.state.Edit; var data = event.target.value; Edit.areaName = data;this.setState({Edit: Edit}); console.log(this.state.Edit.areaName)}
-    handleAreaDescriptionChange(event){ var Edit = this.state.Edit; var data = event.target.value; Edit.areaDescription = data;this.setState({Edit: Edit}); console.log(this.state.Edit.areaDescription)}
+    handleEditChange(e){
+        const {value, name} = e.target
+        var Edit = this.state.Edit;
+        Edit[name] = value;
+        this.setState({Edit: Edit});
+    }
+    handleAddChange(e){
+        const {value, name} = e.target
+        var Add = this.state.Add;
+        Add[name] = value;
+        this.setState({Add: Add});
+    }
 
-    addAreaName(event){ var Add = this.state.Add; var data = event.target.value; Add.areaName = data;this.setState({Add: Add}); console.log(this.state.Add.areaName)}
-    addAreaDescription(event){ var Add = this.state.Add; var data = event.target.value; Add.areaDescription = data;this.setState({Add: Add}); console.log(this.state.Add.areaDescription)}
+
+
 
     handlebuttonEdit(id){
         document.querySelector('.bg-modal3').style.display = 'flex'; // close the edit modal
         var areaId = "";
         var areaName ="";
         var areaDescription = "";
-        //what is the areaId of the sensor with the given deviceId = id
-        // check muna kung ano ung original na areaId nung device gamit ung pinasa na id
         for( var i = 0; i < this.state.areas.length; i++ ){
             if(this.state.areas[i].areaId == id ){
 
@@ -51,8 +57,6 @@ class ManageAreas extends Component {
                 areaDescription = this.state.areas[i].areaDescription;
             }
         }
-            // pag nakita na kung anong areaId, isasave na ngayon sa Edit data sa state. un ung gagamitin pag mag uupdate ng db
-            // change the Edit data in state in which contains the data that needs to be updated in the db
         this.setState(prevState => {
             let Edit = Object.assign({}, prevState.Edit);  // creating copy of state variable
             Edit.areaId = areaId;
@@ -189,11 +193,11 @@ class ManageAreas extends Component {
                             <form>
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Area Name</label>
-                                <input type="text" className="form-control" id="" placeholder="" onChange={this.handleAreaNameChange} value={this.state.Edit.areaName}/>
+                                <input type="text" className="form-control" name="areaName" onChange={this.handleEditChange} value={this.state.Edit.areaName}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Area Description</label>
-                                <textarea type="text" className="form-control" id="" placeholder="" onChange={this.handleAreaDescriptionChange} value={this.state.Edit.areaDescription}/>
+                                <textarea type="text" className="form-control" name="areaDescription" onChange={this.handleEditChange} value={this.state.Edit.areaDescription}/>
                             </div>
                             </form>
                             <div className="form-group row">
@@ -219,11 +223,11 @@ class ManageAreas extends Component {
                             <form>
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Area Name</label>
-                                <input type="text" className="form-control" id="" placeholder="" onChange={this.addAreaName} value={this.state.Add.areaName}/>
+                                <input type="text" className="form-control" name="areaName" onChange={this.handleAddChange} value={this.state.Add.areaName}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Area Description</label>
-                                <textarea type="text" className="form-control" id="" placeholder="" onChange={this.addAreaDescription} value={this.state.Add.areaDescription}/>
+                                <textarea type="text" className="form-control" name="areaDescription" onChange={this.handleAddChange} value={this.state.Add.areaDescription}/>
                             </div>
                             </form>
                             <div className="form-group row">
