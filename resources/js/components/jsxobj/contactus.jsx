@@ -10,18 +10,19 @@ class ContactUs extends Component {
             mobile:"",
             message:""
         }
-        this.handleReasonChanged = this.handleReasonChanged.bind(this)
-        this.handleFullnameChanged = this.handleFullnameChanged.bind(this)
-        this.handleEmailChanged = this.handleEmailChanged.bind(this)
-        this.handleMobileChanged = this.handleMobileChanged.bind(this)
-        this.handleMessageChanged = this.handleMessageChanged.bind(this)
+        this.handleChange = this.handleChange.bind(this)
         this.send = this.send.bind(this)
     }
-    handleReasonChanged(e){this.setState({reason: e.target.value});}
-    handleFullnameChanged(e){this.setState({name: e.target.value});}
-    handleEmailChanged(e){this.setState({email: e.target.value});}
-    handleMobileChanged(e){this.setState({mobile: e.target.value});}
-    handleMessageChanged(e){this.setState({message: e.target.value});}
+
+    handleChange(e){
+        const{name, value} = e.target
+        this.setState((prev) =>({
+            ...prev,
+            [name]:value,
+        }))
+        console.log(this.state[name])
+    }
+
     send(){
 
         // using smtp js
@@ -49,7 +50,7 @@ class ContactUs extends Component {
                                     <div className="form-row">
                                         <div className="form-group col-md-12">
                                             <label htmlFor="reason">Reason for contacting us</label>
-                                                <select className="form-control" id="purpose" onChange={this.handleReasonChanged} value={this.state.reason}>
+                                                <select className="form-control" id="purpose" name="reason" onChange={this.handleChange} value={this.state.reason}>
                                                     <option></option>
                                                     <option>Inquiry</option>
                                                     <option>Partnership</option>
@@ -61,23 +62,23 @@ class ContactUs extends Component {
                                     <div className="form-row">
                                         <div className="form-group col-md-12">
                                             <label htmlFor="Fullname">Full Name</label>
-                                            <input type="Fullname" value={this.state.name} onChange={this.handleFullnameChanged} className="form-control" id="Fullname"/>
+                                            <input type="Fullname" value={this.state.name} name="name" onChange={this.handleChange} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-6">
                                             <label htmlFor="email">Email</label>
-                                            <input type="email" value={this.state.email} onChange={this.handleEmailChanged} className="form-control" id="email"/>
+                                            <input type="email" value={this.state.email} name="email" onChange={this.handleChange} className="form-control" />
                                         </div>
                                         <div className="form-group col-md-6">
                                             <label htmlFor="mobile">Mobile No</label>
-                                            <input type="mobile" value={this.state.mobile} onChange={this.handleMobileChanged} className="form-control" id="mobile"/>
+                                            <input type="mobile" value={this.state.mobile} name="mobile" onChange={this.handleChange} className="form-control"/>
                                         </div>
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-12">
                                             <label htmlFor="messaage">Message</label>
-                                            <textarea className="form-control" value={this.state.message} onChange={this.handleMessageChanged} id="messaage" rows="3"></textarea>
+                                            <textarea className="form-control" value={this.state.message} name="message" onChange={this.handleChange} rows="3"></textarea>
                                         </div>
                                     </div>
                                     {/* <div className="form-row">

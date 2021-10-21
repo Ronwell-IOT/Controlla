@@ -28,10 +28,6 @@ class Control extends Component {
           this.toggleTab = this.toggleTab.bind(this);
           this.handleSaveDeviceButton = this.handleSaveDeviceButton.bind(this)
           this.handleSaveSensorButton = this.handleSaveSensorButton.bind(this)
-
-
-
-
         }
         handleDevChange(event){
             const {name, value} = event.target
@@ -47,9 +43,6 @@ class Control extends Component {
             this.setState({newSen: newSen})
             console.log(this.state.newSen[name])
         }
-
-
-
         handleSaveDeviceButton(){
             var username = window.atob(localStorage.getItem('username'))
             axios.post('/api/AddNewDevice', {
@@ -225,8 +218,6 @@ class Control extends Component {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
             </React.Fragment>
