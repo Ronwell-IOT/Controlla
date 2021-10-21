@@ -269,8 +269,6 @@ class Control extends Component {
             } , 2000)
 
         }
-
-
         handleChange(event){
             const {name, value} = event.target;
             var Edit = this.state.Edit;

@@ -18,22 +18,12 @@ class Login extends Component {
 
         this.handleSignupClicked = this.handleSignupClicked.bind(this)
         this.handleCloseModalButton = this.handleCloseModalButton.bind(this)
-        this.usernameChange = this.usernameChange.bind(this)
-        this.passwordChange = this.passwordChange.bind(this)
         this.saveNewUser = this.saveNewUser.bind(this)
-        this.retypeChange = this.retypeChange.bind(this)
         this.retypeCheck = this.retypeCheck.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.usernameLogin= this.usernameLogin.bind(this)
-        this.passwordLogin = this.passwordLogin.bind(this)
-        this.emailChange = this.emailChange.bind(this)
+        this.handleLoginChange = this.handleLoginChange.bind(this)
+        this.handleSignupChange = this.handleSignupChange.bind(this)
     }
-
-    handleSubmit(){
-        alert("submitted")
-    }
-
     handleLogin(){
 
         axios.post('/api/UserLogin', {
@@ -47,7 +37,7 @@ class Login extends Component {
                 return;
             }
             else{
-                console.log(response.data['token'])
+                // console.log(response.data['token'])
                 localStorage.setItem('username', window.btoa(response.data['user']['name']))
                 localStorage.setItem('token', window.btoa(response.data['token']))
                 window.location.replace('/dashboard')
@@ -69,16 +59,26 @@ class Login extends Component {
     handleCloseModalButton(){
         document.querySelector('.bg-modal8').style.display = 'none';
     }
-    usernameLogin(event){var user = this.state.login;var username = event.target.value;user.username = username;this.setState({login: user});}
-    passwordLogin(event){var user = this.state.login;var password = event.target.value;user.password = password;this.setState({login: user});}
-    usernameChange(event){var user = this.state.registerNewUser;var username = event.target.value;user.username = username;this.setState({registerNewUser: user})}
-    passwordChange(event){var user = this.state.registerNewUser;var password = event.target.value;user.password = password;this.setState({registerNewUser: user}); }
-    emailChange(event){var user = this.state.registerNewUser;var email = event.target.value;user.email = email;this.setState({registerNewUser: user}); }
 
-    retypeChange(){var user = this.state.registerNewUser;var retype = event.target.value;user.retype = retype;this.setState({registerNewUser: user}); }
+    handleLoginChange(e){
+        const {name, value} = e.target;
+        var user = this.state.login;
+        user[name] = value;
+        this.setState({login: user});
+    }
+
+    handleSignupChange(e){
+        const {name, value} = e.target;
+        var user = this.state.registerNewUser;
+        user[name] = value;
+        this.setState({registerNewUser: user});
+        console.log(this.state.registerNewUser[name])
+    }
     retypeCheck(){
         if(this.state.registerNewUser.password != this.state.registerNewUser.retype){
             alert("Passwords Didn't Macth")
+            console.log(this.state.registerNewUser.password)
+            console.log(this.state.registerNewUser.retype)
         }
         else{
             return;
@@ -123,14 +123,14 @@ class Login extends Component {
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text"><i className="fas fa-user"></i></span>
                                             </div>
-                                            <input type="text" className="form-control input-lg josefin-font" placeholder="username" name="username" onChange={this.usernameLogin} defaultValue={this.state.login.username} required/>
+                                            <input type="text" className="form-control input-lg josefin-font" placeholder="username" name="username" onChange={this.handleLoginChange} defaultValue={this.state.login.username} required/>
 
                                         </div>
                                         <div className="input-group form-group input-group-lg">
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text"><i className="fas fa-key"></i></span>
                                             </div>
-                                            <input type="password" className="form-control input-lg josefin-font" placeholder="password" name="password" onChange={this.passwordLogin} defaultValue={this.state.login.password} required/>
+                                            <input type="password" className="form-control input-lg josefin-font" placeholder="password" name="password" onChange={this.handleLoginChange} defaultValue={this.state.login.password} required/>
                                         </div>
 
                                     </form>
@@ -185,7 +185,7 @@ class Login extends Component {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" className="form-control" placeholder="Username" name="username" onChange={this.usernameChange} defaultValue={this.state.registerNewUser.username} required/>
+                                    <input type="text" className="form-control" placeholder="Username" name="username" onChange={this.handleSignupChange} defaultValue={this.state.registerNewUser.username} required/>
 
                                 </div>
 
@@ -193,7 +193,7 @@ class Login extends Component {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-envelope"></i></span>
                                     </div>
-                                    <input type="text" className="form-control" placeholder="Email" name="email" onChange={this.emailChange} defaultValue={this.state.registerNewUser.email} required/>
+                                    <input type="text" className="form-control" placeholder="Email" name="email" onChange={this.handleSignupChange} defaultValue={this.state.registerNewUser.email} required/>
 
                                 </div>
 
@@ -201,13 +201,13 @@ class Login extends Component {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-key"></i></span>
                                     </div>
-                                    <input type="password" className="form-control" placeholder="Password" name="password" onChange={this.passwordChange} defaultValue={this.state.registerNewUser.password} required/>
+                                    <input type="password" className="form-control" placeholder="Password" name="password" onChange={this.handleSignupChange} defaultValue={this.state.registerNewUser.password} required/>
                                 </div>
                                 <div className="input-group form-group input-group-lg josefin-font">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-key"></i></span>
                                     </div>
-                                    <input type="password" className="form-control" placeholder="Re-type password" name="password" onChange={this.retypeChange} onBlur={this.retypeCheck} defaultValue={this.state.registerNewUser.retype} required/>
+                                    <input type="password" className="form-control" placeholder="Re-type password" name="retype" onChange={this.handleSignupChange} onBlur={this.retypeCheck} defaultValue={this.state.registerNewUser.retype} required/>
                                 </div>
 
 
