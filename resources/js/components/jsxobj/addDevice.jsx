@@ -23,32 +23,32 @@ class Control extends Component {
             },
             added:""
           } // end of state
-
+          this.handleDevChange = this.handleDevChange.bind(this)
+          this.handleSenChange = this.handleSenChange.bind(this)
           this.toggleTab = this.toggleTab.bind(this);
           this.handleSaveDeviceButton = this.handleSaveDeviceButton.bind(this)
           this.handleSaveSensorButton = this.handleSaveSensorButton.bind(this)
-          this.handleDevName = this.handleDevName.bind(this)
-          this.handleDevId = this.handleDevId.bind(this)
-          this.handleDevdes = this.handleDevdes.bind(this)
 
-          this.handleSenName = this.handleSenName.bind(this)
-          this.handleSenId = this.handleSenId.bind(this)
-          this.handleSendes = this.handleSendes.bind(this)
 
-          this.handleStatChange = this.handleStatChange.bind(this)
 
 
         }
-        // device form
-        handleDevName(event){ var newDev = this.state.newDev; var modifiedDevname = event.target.value; newDev.deviceName = modifiedDevname;this.setState({newDev: newDev})}
-        handleDevId(event){var newDev = this.state.newDev;var devID = event.target.value;newDev.id = devID;this.setState({newDev: newDev})}
-        handleDevdes(event){var newDev = this.state.newDev;var data = event.target.value;newDev.description = data;this.setState({newDev: newDev});}
-        handleStatChange(event){ var newDev = this.state.newDev;var data = event.target.value ;newDev.status = data;this.setState({newDev: newDev}); }
+        handleDevChange(event){
+            const {name, value} = event.target
+            var newDev = this.state.newDev;
+            newDev[name] = value;
+            this.setState({newDev: newDev})
+            console.log(this.state.newDev[name])
+        }
+        handleSenChange(event){
+            const {name, value} = event.target
+            var newSen = this.state.newSen;
+            newSen[name] = value;
+            this.setState({newSen: newSen})
+            console.log(this.state.newSen[name])
+        }
 
-        //sensor form
-        handleSenName(event){ var newSen = this.state.newSen; var data = event.target.value; newSen.deviceName = data;this.setState({newSen: newSen});}
-        handleSenId(event){var newSen = this.state.newSen;var data = event.target.value;newSen.id = data;this.setState({newSen: newSen})}
-        handleSendes(event){var newSen = this.state.newSen;var data = event.target.value;newSen.description = data;this.setState({newSen: newSen});}
+
 
         handleSaveDeviceButton(){
             var username = window.atob(localStorage.getItem('username'))
@@ -120,36 +120,20 @@ class Control extends Component {
                             <div className="form-group row">
                                 <label  className="col-sm-2 col-form-label" htmlFor="deviceName">Device Name</label>
                                 <div className="col-sm-10">
-                                    <input type="deviceName" className="form-control" id="deviceName" onChange={this.handleDevName} value={this.state.newDev.deviceName} required />
+                                    <input type="deviceName" className="form-control" id="deviceName" onChange={this.handleDevChange} name="deviceName" value={this.state.newDev.deviceName} required />
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label htmlFor="deviceId" className="col-sm-2 col-form-label">Device Id</label>
                                 <div className="col-sm-10">
-                                    <input type="deviceId" className="form-control" id="deviceId" onChange={this.handleDevId} value={this.state.newDev.id} required/>
+                                    <input type="deviceId" className="form-control" id="deviceId" onChange={this.handleDevChange} name="id" value={this.state.newDev.id} required/>
                                 </div>
                             </div>
-                            {/* <fieldset className="form-group row">
-                                    <legend className="col-form-label col-sm-2 float-sm-left pt-0">Default Status</legend>
-                                    <div className="col-sm-10">
-                                        <div className="form-check">
-                                            <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="1" checked={this.state.newDev.status === "1"} onChange={this.handleStatChange}/>
-                                            <label className="form-check-label" htmlFor="gridRadios1">
-                                            On
-                                            </label>
-                                        </div>
-                                        <div className="form-check">
-                                            <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="0" checked={this.state.newDev.status === "0"} onChange={this.handleStatChange}/>
-                                            <label className="form-check-label" htmlFor="gridRadios2">
-                                            Off
-                                            </label>
-                                        </div>
-                                    </div>
-                                </fieldset> */}
+
                             <div className="form-group row">
                                 <label htmlFor="deviceId" className="col-sm-2 col-form-label">Description</label>
                                 <div className="col-sm-10">
-                                <textarea className="form-control " id="deviceId" placeholder="Add description ex. Located at Office A" onChange={this.handleDevdes} value={this.state.newDev.description} required></textarea>
+                                <textarea className="form-control " id="deviceId" placeholder="Add description ex. Located at Office A" onChange={this.handleDevChange} name="description" value={this.state.newDev.description} required></textarea>
 
                                 </div>
                             </div>
@@ -172,19 +156,19 @@ class Control extends Component {
                             <div className="form-group row">
                                 <label  className="col-sm-2 col-form-label" htmlFor="deviceName" >Sensor Name</label>
                                 <div className="col-sm-10">
-                                    <input type="deviceName" className="form-control" id="deviceName" onChange={this.handleSenName} value={this.state.newSen.deviceName} required/>
+                                    <input type="deviceName" className="form-control" id="deviceName" onChange={this.handleSenChange} value={this.state.newSen.deviceName} required/>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label htmlFor="deviceId" className="col-sm-2 col-form-label">Sensor Id</label>
                                 <div className="col-sm-10">
-                                    <input type="deviceId" className="form-control" id="deviceId"   onChange={this.handleSenId} value={this.state.newSen.id} required/>
+                                    <input type="deviceId" className="form-control" id="deviceId"   onChange={this.handleSenChange} value={this.state.newSen.id} required/>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label htmlFor="deviceId" className="col-sm-2 col-form-label" >Description</label>
                                 <div className="col-sm-10">
-                                    <textarea className="form-control " id="deviceId" placeholder="Add description ex. Located at Office A" onChange={this.handleSendes} value={this.state.newSen.description} required></textarea>
+                                    <textarea className="form-control " id="deviceId" placeholder="Add description ex. Located at Office A" onChange={this.handleSenChange} value={this.state.newSen.description} required></textarea>
 
                                 </div>
                             </div>
@@ -224,9 +208,6 @@ class Control extends Component {
                             <div className="toast-header">
                                 <img src="/pictures/icon2.png" style={{width:'20px'}} className="rounded mr-2" alt="..."/>
                                 <strong className="mr-auto">Success</strong>
-                                {/* <button type="button" className="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button> */}
                             </div>
                             <div className="toast-body">
                                 {this.state.added} is succesfully added.
@@ -238,9 +219,6 @@ class Control extends Component {
                             <div className="toast-header">
                                 <img src="/pictures/cross.png" style={{width:'20px'}} className="rounded mr-2" alt="..."/>
                                 <strong className="mr-auto">Error</strong>
-                                {/* <button type="button" className="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button> */}
                             </div>
                             <div className="toast-body">
                                 {this.state.added} is not added.
