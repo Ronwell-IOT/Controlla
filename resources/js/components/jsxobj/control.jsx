@@ -40,11 +40,7 @@ class Control extends Component {
           this.handleCloseModalButton = this.handleCloseModalButton.bind(this); // this is the close button when the edit form modal pops up in the screen
           this.handleDeleteButton = this.handleDeleteButton.bind(this) // this is the function for each of the delete button in the sensor and control device
           this.handleUpdateDB = this.handleUpdateDB.bind(this) // function for the save button
-          this.handleDevicenameChange = this.handleDevicenameChange.bind(this) // this when the device text box in the edit modal is changed.
-          this.handleDeviceIdChange = this.handleDeviceIdChange.bind(this) // this is when the device id text box in the edit modal is changed.
-          this.handleDevicedesChange =this.handleDevicedesChange.bind(this) // this is when the device description in the edit modal is changed
-          this.handleminvalChange = this.handleminvalChange.bind(this)
-          this.handlemaxvalChange = this.handlemaxvalChange.bind(this)
+          this.handleChange = this.handleChange.bind(this)
             //  this.updateSensorValue = this.updateSensorValue.bind(this);
         }
         handleButtonToggle(id){  /////////// function for switching the control on/ off
@@ -275,59 +271,14 @@ class Control extends Component {
         }
 
 
-        handleDevicenameChange(event){ // runs when data in edit modal => device name textbox has changed
+        handleChange(event){
+            const {name, value} = event.target;
             var Edit = this.state.Edit;
-            var modifiedDevname = event.target.value;
-            Edit.deviceName = modifiedDevname;
-            this.setState(
-                {
-                    Edit: Edit
-                }
-            )
+            Edit[name] = value;
+            this.setState({Edit: Edit})
 
         }
-        handleDeviceIdChange(event){// runs when data in edit modal => device id textbox has changed
-            var Edit = this.state.Edit;
-            var modifiedDevid = event.target.value;
-            Edit.id = modifiedDevid;
-            this.setState(
-                {
-                    Edit: Edit
-                }
-            )
-        }
-        handleminvalChange(event){
-            var Edit = this.state.Edit;
-            var minval = event.target.value;
-            Edit.minval = minval;
-            this.setState(
-                {
-                    Edit: Edit
-                }
-            )
-            console.log(this.state.Edit.minval)
-        }
-        handlemaxvalChange(event){
-            var Edit = this.state.Edit;
-            var maxval = event.target.value;
-            Edit.maxval = maxval;
-            this.setState(
-                {
-                    Edit: Edit
-                }
-            )
-            console.log(this.state.Edit.maxval)
-        }
-        handleDevicedesChange(event){// runs when data in edit modal => device description  textbox has changed
-            var Edit = this.state.Edit;
-            var modifiedDevdes = event.target.value;
-            Edit.description = modifiedDevdes;
-            this.setState(
-                {
-                    Edit: Edit
-                }
-            )
-        }
+
         sensorValueAdditionalSettings(){
 
                 if(this.state.activeTab == 1){
@@ -337,13 +288,13 @@ class Control extends Component {
                         <div className="form-group row">
                             <label htmlFor="deviceId" className="col-sm-2 col-form-label">Minimum</label>
                             <div className="col-sm-10">
-                                <input type="text" onChange={this.handleminvalChange} value={this.state.Edit.minval} className="form-control" id="minval" required/>
+                                <input type="text" onChange={this.handleChange} name="minval" value={this.state.Edit.minval} className="form-control"  required/>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label  className="col-sm-2 col-form-label" htmlFor="deviceName">Maximum</label>
                             <div className="col-sm-10">
-                                <input type="text" onChange={this.handlemaxvalChange} value={this.state.Edit.maxval} className="form-control" id="maxval" required />
+                                <input type="text" onChange={this.handleChange} name="maxval" value={this.state.Edit.maxval} className="form-control" required />
                             </div>
                         </div>
                     </div>
@@ -496,20 +447,20 @@ class Control extends Component {
                                 <div className="form-group row">
                                     <label htmlFor="deviceId" className="col-sm-2 col-form-label">Id</label>
                                     <div className="col-sm-10">
-                                        <input type="text" onChange={this.handleDeviceIdChange} defaultValue={this.state.Edit.id} className="form-control" id="deviceId" required/>
+                                        <input type="text" onChange={this.handleChange} name="id" defaultValue={this.state.Edit.id} className="form-control"  required/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label  className="col-sm-2 col-form-label" htmlFor="deviceName">Name</label>
                                     <div className="col-sm-10">
-                                        <input type="text" onChange={this.handleDevicenameChange} defaultValue={this.state.Edit.deviceName} className="form-control" id="deviceName" required />
+                                        <input type="text" onChange={this.handleChange} name="deviceName" defaultValue={this.state.Edit.deviceName} className="form-control"  required />
                                     </div>
                                 </div>
 
                                 <div className="form-group row">
                                     <label htmlFor="deviceId" className="col-sm-2 col-form-label">Description</label>
                                     <div className="col-sm-10">
-                                    <textarea className="form-control " onChange={this.handleDevicedesChange} defaultValue={this.state.Edit.description} id="deviceId" placeholder="Add description ex. Located at Office A" required></textarea>
+                                    <textarea className="form-control " onChange={this.handleChange} name="description" defaultValue={this.state.Edit.description} placeholder="Add description ex. Located at Office A" required></textarea>
 
                                     </div>
                                 </div>
